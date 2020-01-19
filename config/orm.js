@@ -8,22 +8,22 @@ var orm = {
         console.log(result);
       });
     },
-    insertOne: function(menu, colToSearch, valOfCol) {
-      var queryString = "SELECT * FROM ?? WHERE ?? = ?";
+    insertOne: function(menu, newItem) {
+      var queryString = "INSERT INTO ?? VALUES ??";
   
       console.log(queryString);
   
-      connection.query(queryString, [menu, colToSearch, valOfCol], function(err, result) {
+      connection.query(queryString, [menu, newItem], function(err, result) {
         if (err) throw err;
         console.log(result);
       });
     },
-    updateOne: function(whatToSelect, tableOne, tableTwo, onTableOneCol, onTableTwoCol) {
-      var queryString = "SELECT ?? FROM ?? ";
+    updateOne: function(menu, newValue) {
+      var queryString = "UPDATE ? SET ?";
   
       console.log(queryString);
   
-      connection.query(queryString, [whatToSelect, tableOne, tableTwo, onTableOneCol, onTableTwoCol], function(
+      connection.query(queryString, [menu, newValue], function(
         err,
         result
       ) {
