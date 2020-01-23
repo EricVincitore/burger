@@ -17,20 +17,22 @@ router.get("/", function(req, res) {
 });
 
 router.post("/api/burgers", function(req, res) {
-  burger.create(["name", "devoured"], [req.body.name, req.body.devoured], function(result) {
+  var devoured = req.body.devoured === "true"  
+
+  burger.create(["burger_name", "devoured"], [req.body.burger_name, devoured], function(result) {
     // Send back the ID of the new quote
     res.json({ id: result.insertId });
   });
 });
 
 router.put("/api/burgers/:id", function(req, res) {
-  var devoured = "id = " + req.params.id;
-
+  var condition = "id = " + req.params.id;
+  console.log(req.body.devoured)
   burger.update(
     {
       devoured: req.body.devoured
     },
-    devoured,
+    condition,
     function(result) {
       if (result.changedRows === 0) {
         // If no rows were changed, then the ID must not exist, so 404
